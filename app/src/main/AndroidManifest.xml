@@ -14,8 +14,11 @@
 
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustResize">
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -23,7 +26,23 @@
         </activity>
 
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".ui.SignUpActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.DashboardActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.DonorDetailActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.MyRequestsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.ProfileActivity"
             android:exported="false" />
 
     </application>
