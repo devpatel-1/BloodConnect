@@ -78,4 +78,14 @@ class AuthRepository {
             Result.failure(e)
         }
     }
+    /** Updates just the availability flag for the current user. */
+    suspend fun updateAvailability(isAvailable: Boolean): Result<Unit> {
+        val uid = currentUserId() ?: return Result.failure(Exception("Not logged in"))
+        return try {
+            usersCollection.document(uid).update("isAvailable", isAvailable).await()
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }
