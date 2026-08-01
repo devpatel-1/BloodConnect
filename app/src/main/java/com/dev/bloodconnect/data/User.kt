@@ -1,6 +1,9 @@
 package com.dev.bloodconnect.data
 
 import com.google.firebase.Timestamp
+import com.google.firebase.firestore.Exclude
+
+
 
 data class User(
     val uid: String = "",
