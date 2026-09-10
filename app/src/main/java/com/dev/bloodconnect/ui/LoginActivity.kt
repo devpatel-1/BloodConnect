@@ -44,8 +44,8 @@ class LoginActivity : AppCompatActivity() {
                 loginButton.isEnabled = true
 
                 result.onSuccess {
-                    Toast.makeText(this@LoginActivity, "Login successful!", Toast.LENGTH_SHORT).show()
-                    // We'll wire up navigation to the Dashboard in a later step
+                    startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
+                    finish()
                 }.onFailure { error ->
                     Toast.makeText(
                         this@LoginActivity,
@@ -57,8 +57,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         goToSignUp.setOnClickListener {
-            Toast.makeText(this, "Sign up screen coming soon", Toast.LENGTH_SHORT).show()
-            // We'll wire up SignUpActivity in a later step
+            startActivity(Intent(this, SignUpActivity::class.java))
         }
     }
 }
