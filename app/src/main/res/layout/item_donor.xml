@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:background="#FFFFFF"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginVertical="6dp">
+
+    <TextView
+        android:id="@+id/donorBloodGroup"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="#B71C1C"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:text="O+"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/donorName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/donorBloodGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="12dp"
+        tools:text="Devendra Patel" />
+
+    <TextView
+        android:id="@+id/donorCity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="#666666"
+        app:layout_constraintTop_toBottomOf="@id/donorName"
+        app:layout_constraintStart_toEndOf="@id/donorBloodGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="2dp"
+        tools:text="Mahesana" />
+
+    <TextView
+        android:id="@+id/donorAvailability"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/donorCity"
+        app:layout_constraintStart_toEndOf="@id/donorBloodGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="2dp"
+        tools:text="Available" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
