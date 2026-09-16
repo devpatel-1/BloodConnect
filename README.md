@@ -1,69 +1,76 @@
 # BloodConnect 🩸
 
-A mobile app that connects blood donors with people in need — in real time, across devices.
+> **Find a donor. Send a request. Save a life.**
 
-## Objective
+BloodConnect is a native Android application designed to connect people who need blood with available blood donors in real time.
 
-Built for the **Mobile Application Development** course (2CEIT5PE18) at Ganpat University.
-BloodConnect solves a real civic problem: finding an available, nearby blood donor
-quickly during an emergency, using live cloud data instead of static directories or
-phone-book searching.
+The project was developed for the **Mobile Application Development (2CEIT5PE18)** course at **Ganpat University**.
 
-## Features
+## 🎯 Objective
 
-- ✅ Email/password signup & login (Firebase Authentication)
-- ✅ Donor profile creation (name, blood group, phone, city)
-- ✅ Real-time donor list with live search & filter (by blood group, city, or name)
-- ✅ Dashboard stats — total donor count and breakdown by blood group
-- ✅ Donor Detail view with full contact info
-- ✅ Send blood requests to donors, with duplicate-request prevention
-- ✅ "My Requests" screen to track sent requests and their status
-- ✅ "My Profile" screen — edit availability with a 90-day donation-safety rule
-- ✅ Logout
+Finding a suitable blood donor during an emergency can be difficult when relying on phone contacts, WhatsApp groups, or static donor lists.
 
-## Tech Stack
+BloodConnect provides a centralized platform where users can register as donors, search for suitable donors, check their availability, and send blood requests directly through the application.
 
-- **Kotlin**
-- **Android Views** — ConstraintLayout, RecyclerView, Material Components
-- **Firebase Authentication** — email/password login
-- **Firebase Firestore** — real-time cloud database (live sync across devices)
-- **Kotlin Coroutines** — async Firebase calls
+## ✨ Features
 
-## Architecture
+### 🔐 Authentication
+- Email/password signup and login using Firebase Authentication
+- Password recovery
+- Secure logout
 
-```
-app/src/main/java/com/dev/bloodconnect/
- ├─ data/          # Data models (User.kt, Request.kt)
- ├─ repository/    # Firebase Auth + Firestore wrapper classes
- │   ├─ AuthRepository.kt
- │   ├─ DonorRepository.kt
- │   └─ RequestRepository.kt
- └─ ui/            # Activities & Adapters
-     ├─ LoginActivity.kt
-     ├─ SignUpActivity.kt
-     ├─ DashboardActivity.kt
-     ├─ DonorDetailActivity.kt
-     ├─ MyRequestsActivity.kt
-     ├─ ProfileActivity.kt
-     ├─ DonorAdapter.kt
-     └─ RequestAdapter.kt
-```
+### 🩸 Donor Discovery
+- Create donor profile with name, blood group, phone and city
+- Real-time donor list using Cloud Firestore
+- Search donors by **name, city, or blood group**
+- Dashboard statistics with donor and blood-group counts
+- Current user is excluded from the donor list
 
-**Firestore data model:**
-```
-users/{uid}
- ├─ name, phone, bloodGroup, city
- ├─ isAvailable: Boolean
- └─ lastDonationDate, createdAt
+### 🟢 Availability
+- Donors can mark themselves as available/unavailable
+- Availability is stored in Firestore
+- 90-day donation interval is considered when determining donor availability
+- Unavailable donors cannot receive new blood requests
 
-requests/{requestId}
- ├─ requesterId, requesterName
- ├─ donorId, donorName, bloodGroup
- ├─ status: "pending" | "accepted" | "declined"
- └─ createdAt
-```
+### 📨 Blood Requests
+- Send a blood request to an available donor
+- Prevent duplicate pending requests
+- Prevent users from requesting themselves
+- Donors can view incoming requests
+- Donors can **Accept** or **Decline** requests
+- Requesters can track request status through **My Requests**
+- Request status updates in real time
 
-## Screenshots
+### 🔒 Security & Reliability
+- Firebase Authentication for user identity
+- Firestore Security Rules for authorized database access
+- Input validation on signup
+- Loading states and error handling
+- Real-time Firestore listeners with lifecycle management
+
+## 🛠️ Tech Stack
+
+| Technology | Usage |
+|---|---|
+| **Kotlin** | Android development |
+| **Android Studio** | Development environment |
+| **Android Views** | UI development |
+| **ConstraintLayout** | Screen layouts |
+| **RecyclerView** | Donor & request lists |
+| **Material Components** | UI components |
+| **Firebase Authentication** | User authentication |
+| **Cloud Firestore** | Real-time database |
+| **Kotlin Coroutines** | Asynchronous operations |
+| **Git & GitHub** | Version control |
+
+## 🏗️ Project Architecture
+
+The project follows a simple layered structure:
+
+
+## 📱 Screenshots
+
+## 📱 Screenshots
 
 | Login | Sign Up | Dashboard |
 |---|---|---|
@@ -73,54 +80,116 @@ requests/{requestId}
 |---|---|
 | ![My Requests](screenshots/4.png) | ![My Profile](screenshots/5.png) |
 
-## Setup Instructions
+```text
+com.dev.bloodconnect/
+│
+├── data/
+│   ├── User.kt
+│   └── Request.kt
+│
+├── repository/
+│   ├── AuthRepository.kt
+│   ├── DonorRepository.kt
+│   └── RequestRepository.kt
+│
+└── ui/
+    ├── LoginActivity.kt
+    ├── SignUpActivity.kt
+    ├── DashboardActivity.kt
+    ├── DonorDetailActivity.kt
+    ├── ProfileActivity.kt
+    ├── MyRequestsActivity.kt
+    ├── IncomingRequestsActivity.kt
+    ├── DonorAdapter.kt
+    ├── RequestAdapter.kt
+    └── IncomingRequestAdapter.kt
 
-1. Clone this repo
-2. Open in Android Studio (Kotlin, min SDK 24)
-3. Create your own Firebase project at [console.firebase.google.com](https://console.firebase.google.com)
-4. Enable **Authentication → Email/Password** and **Firestore Database**
-5. Download `google-services.json` from your Firebase project and place it in the `app/` folder
-6. Sync Gradle and run
+Data Flow
 
-## Progress Log
+UI
+ ↓
+Repository
+ ↓
+Firebase
+ ├── Authentication
+ └── Firestore
 
-| Day | Update |
-|---|---|
-| Day 1 | Project setup, repo initialized on GitHub |
-| Day 2 | User model, AuthRepository, Login screen UI + logic |
-| Day 3 | Sign Up screen, Dashboard placeholder, navigation wired up |
-| Day 4 | Real-time Dashboard with RecyclerView, live search & filter |
-| Day 5 | Donor Detail screen, Request system, My Requests screen |
-| Day 6 | My Profile (availability toggle), Dashboard stats, duplicate-request prevention, app theming |
+☁️ Firestore Structure
 
-## Challenges Faced
+users/{uid}
+ ├── name
+ ├── phone
+ ├── bloodGroup
+ ├── city
+ ├── isAvailable
+ ├── lastDonationDate
+ └── createdAt
 
-- **Firestore data model design** — deciding between embedding requests inside donor
-  documents vs. a separate `requests` collection. Went with a separate collection since
-  it scales better and keeps donor documents lightweight.
-- **Real-time listeners and lifecycle management** — had to make sure Firestore
-  snapshot listeners were removed in `onDestroy()` to avoid memory leaks and
-  unnecessary reads once a screen closes.
-- **ConstraintLayout chaining bugs** — a missing `layout_constraintStart_toEndOf`
-  on one header button caused all three header links (Profile/Requests/Logout) to
-  become effectively untappable, since their positions were ambiguous. Fixed by
-  explicitly chaining each view's start constraint to the previous view's end.
-- **Firestore serialization quirks** — Firestore's automatic object mapper tried to
-  serialize a computed Kotlin function (`isActuallyAvailable()`) as if it were a
-  field, due to Kotlin's `is`-prefixed boolean naming convention. Resolved with
-  the `@Exclude` annotation.
-- **Duplicate blood requests** — added a check to prevent sending multiple pending
-  requests to the same donor.
+requests/{requestId}
+ ├── requesterId
+ ├── requesterName
+ ├── donorId
+ ├── donorName
+ ├── bloodGroup
+ ├── status
+ └── createdAt
 
-## Future Work
+Request lifecycle:
 
-- Push notifications for new donor requests
-- Map view showing nearby donors
-- Ability for donors to accept/decline incoming requests (currently requests are
-  visible but not actionable by the donor)
-- SOS emergency broadcast to all matching donors in a city
-- Custom app icon and dark-mode theme support
+Pending → Accepted
+        → Declined
 
----
 
-<p align="center">Made with ❤️ and passion by <b>Dev Patel</b></p>
+🧪 Tested Workflow
+
+The complete donor-request workflow has been tested across two accounts:
+
+Account A
+    ↓
+Send Blood Request
+    ↓
+Account B
+    ↓
+Incoming Request
+    ↓
+Accept / Decline
+    ↓
+Firestore
+    ↓
+Account A
+    ↓
+My Requests
+    ↓
+Updated Status
+
+🚀 Setup
+Clone the repository.
+Open the project in Android Studio.
+Create a Firebase project.
+Enable Email/Password Authentication.
+Create a Cloud Firestore Database.
+Add google-services.json to the app/ directory.
+Sync Gradle.
+Build and run the application.
+🔮 Future Improvements
+🔔 Push notifications for new blood requests
+🗺️ Map-based nearby donor discovery
+🚨 SOS emergency broadcast
+🏥 Hospital/organization accounts
+📊 Donation history
+🌙 Dark mode
+🌐 Multi-language support
+🎓 Academic Information
+
+Project: BloodConnect
+Course: Mobile Application Development (2CEIT5PE18)
+University: Ganpat University
+Platform: Android
+Language: Kotlin
+
+👨‍💻 Developer
+
+Dev Patel
+Computer Engineering — Ganpat University
+
+<p align="center"> Made with ❤️ using Kotlin & Firebase </p> ```
