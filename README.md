@@ -192,4 +192,6 @@ Language: Kotlin
 Dev Patel
 Computer Engineering — Ganpat University
 
-<p align="center"> Made with ❤️ using Kotlin & Firebase </p> ```
+```
+
+<p align="center"> Made with ❤️ using Kotlin & Firebase </p>
