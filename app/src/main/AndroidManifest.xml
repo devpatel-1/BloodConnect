@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Firebase / Internet access -->
+    <uses-permission
+        android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,35 +18,54 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BloodConnect">
 
+        <!-- Incoming blood requests -->
+        <activity
+            android:name=".ui.IncomingRequestsActivity"
+            android:exported="false" />
+
+        <!-- MainActivity -->
         <activity
             android:name=".MainActivity"
             android:exported="false" />
 
+        <!-- Login is the launcher -->
         <activity
             android:name=".ui.LoginActivity"
             android:exported="true">
+
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+
+                <action
+                    android:name="android.intent.action.MAIN" />
+
+                <category
+                    android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
+
         </activity>
 
+        <!-- Signup -->
         <activity
             android:name=".ui.SignUpActivity"
             android:exported="false" />
 
+        <!-- Dashboard -->
         <activity
             android:name=".ui.DashboardActivity"
             android:exported="false" />
 
+        <!-- Donor details -->
         <activity
             android:name=".ui.DonorDetailActivity"
             android:exported="false" />
 
+        <!-- My outgoing requests -->
         <activity
             android:name=".ui.MyRequestsActivity"
             android:exported="false" />
 
+        <!-- Profile -->
         <activity
             android:name=".ui.ProfileActivity"
             android:exported="false" />
